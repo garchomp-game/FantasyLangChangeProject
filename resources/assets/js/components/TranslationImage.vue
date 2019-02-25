@@ -19,7 +19,7 @@
         <div class="form-group">
             <button class="form-control" @click='outputImage'>画像として保存する</button>
         </div>
-        <div>
+        <div style="width:500px;">
             <p id="transitionResult" v-bind:class="languageType" style="font-size:32px;">{{speak}}</p>
         </div>
         <!--
@@ -27,9 +27,8 @@
         後にこの空divにv-modelを付与するかidを持たせて画像保存処理に使う。 
         書き方が全然vueらしくないがそこは調べながら後で対策を考えることにする。githubで一応privateにしているけど
         公開していいものだと個人的には思っているので、teratailとかにこちらをサンプルソースとして質問に使うかも
-        -->
-        <div></div>
-    </div>
+    -->
+</div>
 </template>
 
 <script>
@@ -45,8 +44,7 @@ export default {
                 { text: 'ドラゴン文字', value: 'dragon'},
                 { text: 'ポケモン文字', value: 'pokemon'}
             ],
-            languageType: '',
-            Image: null
+            languageType: ''
         }
     },
     methods: {
@@ -57,10 +55,29 @@ export default {
             console.log('outputImage!');
             var dmy = document.getElementById('transitionResult');
             html2canvas(dmy).then(function(canvas){
-                document.body.appendChild(canvas);
+                saveAs(canvas.toDataURL(), 'canvas.png');
             }).catch(function(err){
                 alert(err);
             });
+            function saveAs(uri, filename) {
+                var link = document.createElement('a');
+                if (typeof link.download === 'string') {
+                    link.href = uri;
+                    link.download = filename;
+                    
+                    //Firefox requires the link to be in the body
+                    document.body.appendChild(link);
+                    
+                    //simulate click
+                    link.click();
+                    
+                    //remove the link when done
+                    document.body.removeChild(link);
+                } else {
+                    window.open(uri);
+                }
+            }
+            
         }
     }
 }
@@ -75,4 +92,5 @@ export default {
 .dragon {
     font-family: 'dragonLang';
 }
+
 </style>

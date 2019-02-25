@@ -47965,7 +47965,7 @@ exports = module.exports = __webpack_require__(25)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* 現在は実験のため直で書いているが、これらはfont.scssとしてfont集にまとめるものとする。 */\n@font-face {\n    font-family: 'dragonLang';\n    src:url(" + escape(__webpack_require__(73)) + ");\n}\n.dragon[data-v-0f879261] {\n    font-family: 'dragonLang';\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* 現在は実験のため直で書いているが、これらはfont.scssとしてfont集にまとめるものとする。 */\n@font-face {\n    font-family: 'dragonLang';\n    src:url(" + escape(__webpack_require__(73)) + ");\n}\n.dragon[data-v-0f879261] {\n    font-family: 'dragonLang';\n}\n\n", ""]);
 
 // exports
 
@@ -48072,7 +48072,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 console.log('component-pass');
@@ -48084,8 +48083,7 @@ console.log('component-pass');
             select_lang: '',
             options: [// optionsの配列。今後増えること考え、この配列はデータベースに持たせるのもあり。
             { text: 'ドラゴン文字', value: 'dragon' }, { text: 'ポケモン文字', value: 'pokemon' }],
-            languageType: '',
-            Image: null
+            languageType: ''
         };
     },
     methods: {
@@ -48096,10 +48094,28 @@ console.log('component-pass');
             console.log('outputImage!');
             var dmy = document.getElementById('transitionResult');
             __WEBPACK_IMPORTED_MODULE_0_html2canvas___default()(dmy).then(function (canvas) {
-                document.body.appendChild(canvas);
+                saveAs(canvas.toDataURL(), 'canvas.png');
             }).catch(function (err) {
                 alert(err);
             });
+            function saveAs(uri, filename) {
+                var link = document.createElement('a');
+                if (typeof link.download === 'string') {
+                    link.href = uri;
+                    link.download = filename;
+
+                    //Firefox requires the link to be in the body
+                    document.body.appendChild(link);
+
+                    //simulate click
+                    link.click();
+
+                    //remove the link when done
+                    document.body.removeChild(link);
+                } else {
+                    window.open(uri);
+                }
+            }
         }
     }
 });
@@ -52122,7 +52138,9 @@ var render = function() {
           _vm._l(_vm.options, function(option) {
             return _c("option", { domProps: { value: option.value } }, [
               _vm._v(
-                "\n                " + _vm._s(option.text) + "\n            "
+                "\n                    " +
+                  _vm._s(option.text) +
+                  "\n                "
               )
             ])
           })
@@ -52139,7 +52157,7 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", [
+    _c("div", { staticStyle: { width: "500px" } }, [
       _c(
         "p",
         {
@@ -52149,9 +52167,7 @@ var render = function() {
         },
         [_vm._v(_vm._s(_vm.speak))]
       )
-    ]),
-    _vm._v(" "),
-    _c("div")
+    ])
   ])
 }
 var staticRenderFns = []
