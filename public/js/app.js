@@ -47965,7 +47965,7 @@ exports = module.exports = __webpack_require__(25)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* 現在は実験のため直で書いているが、これらはfont.scssとしてfont集にまとめるものとする。 */\n@font-face {\n    font-family: 'dragonLang';\n    src:url(" + escape(__webpack_require__(73)) + ");\n}\n.dragon[data-v-0f879261] {\n    font-family: 'dragonLang';\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* 現在は実験のため直で書いているが、これらはfont.scssとしてfont集にまとめるものとする。 */\n@font-face {\n    font-family: 'dragonLang';\n    src:url(" + escape(__webpack_require__(73)) + ");\n}\n.dragon[data-v-0f879261] {\n    font-family: 'dragonLang';\n}\n\n", ""]);
 
 // exports
 
@@ -48116,6 +48116,12 @@ console.log('component-pass');
                     window.open(uri);
                 }
             }
+        },
+        opt: function opt(oldVal, e) {
+            var re = new RegExp(e.target.pattern);
+            var result = re.exec(e.target.value);
+            console.log(oldVal);
+            return e.target.value = result ? result[0] : null;
         }
     }
 });
@@ -52074,23 +52080,12 @@ var render = function() {
       _c("label", { attrs: { for: "" } }, [_vm._v("入力文字")]),
       _vm._v(" "),
       _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.speak,
-            expression: "speak"
-          }
-        ],
         staticClass: "form-control",
-        attrs: { type: "text" },
+        attrs: { pattern: "^[a-z1-9]+", type: "text" },
         domProps: { value: _vm.speak },
         on: {
           input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.speak = $event.target.value
+            _vm.speak = _vm.opt(_vm.speak, $event)
           }
         }
       })

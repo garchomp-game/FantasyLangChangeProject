@@ -5,7 +5,7 @@
             <label for="">入力文字</label>
             <!-- 後ほどinputのspeakに英文字だけにするバリデーションをかける -->
             <!-- また、英語の子文字以外そもそも入力できないようにする外部ライブラリを導入する -->
-            <input class="form-control" v-model="speak" type="text">
+            <input class="form-control" pattern="^[a-z1-9]+" @input="speak=opt(speak, $event)" :value="speak" type="text">
         </div>
         <div class="form-group">
             <label for="">文字種選択</label>
@@ -78,6 +78,12 @@ export default {
                 }
             }
             
+        },
+        opt:function(oldVal,e){
+            var re = new RegExp(e.target.pattern);
+            var result = re.exec(e.target.value);
+            console.log(oldVal);
+            return e.target.value = (result)?result[0]:null;
         }
     }
 }
