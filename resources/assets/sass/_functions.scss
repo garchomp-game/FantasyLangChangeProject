@@ -1,0 +1,9 @@
+@mixin setLang($name) {
+    @font-face {
+        font-family: '#{$name}';
+        src:url('../fontFile/#{$name}.ttf');
+    }
+    .#{$name} {
+        font-family: '#{$name}';
+    }
+}

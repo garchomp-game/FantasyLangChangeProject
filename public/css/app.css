@@ -8333,3 +8333,12 @@ button.close {
   }
 }
 
+@font-face {
+  font-family: "dragon-alphabet";
+  src: url(/fonts/dragon-alphabet.ttf?3f5463478108a993220c6eae97197b23);
+}
+
+.dragon-alphabet {
+  font-family: "dragon-alphabet";
+}
+
