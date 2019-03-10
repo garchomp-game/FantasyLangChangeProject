@@ -18,3 +18,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/translation/index', 'TranslationController@index')->name('translation.index');
+Route::get('/translation/image_share', 'TranslationController@image_share')->name('translation.image_share');
